@@ -22,13 +22,14 @@ public class SensorData {
     private double temperature;
     private SoundData sound;
     private String topic;
+    private long startProcessingTimestamp;
 
     public SensorData() {
 
     }
 
     public SensorData(LocalDateTime dateTime, double proximity, double humidity, double pressure, double light,
-                      double oxidised, double reduced, double nh3, double temperature, SoundData sound, String topic) {
+                      double oxidised, double reduced, double nh3, double temperature, SoundData sound, String topic, long startProcessingTimestamp) {
         this.dateTime = dateTime;
         this.proximity = proximity;
         this.humidity = humidity;
@@ -40,6 +41,7 @@ public class SensorData {
         this.temperature = temperature;
         this.sound = sound;
         this.topic = topic;
+        this.startProcessingTimestamp = startProcessingTimestamp;
     }
 
     public LocalDateTime getDateTime() {
@@ -86,7 +88,15 @@ public class SensorData {
         this.topic = topic;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public SoundData getSound() {
         return sound;
+    }
+
+    public long getStartProcessingTimestamp() {
+        return startProcessingTimestamp;
     }
 }

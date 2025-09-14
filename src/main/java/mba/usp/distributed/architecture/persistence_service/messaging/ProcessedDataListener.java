@@ -2,7 +2,7 @@ package mba.usp.distributed.architecture.persistence_service.messaging;
 
 import io.micrometer.core.annotation.Timed;
 import mba.usp.distributed.architecture.persistence_service.model.SensorData;
-import mba.usp.distributed.architecture.persistence_service.service.PersistenceProcessor;
+import mba.usp.distributed.architecture.persistence_service.services.PersistenceProcessor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +15,6 @@ public class ProcessedDataListener {
         this.processor = processor;
     }
 
-    @Timed(
-            value = "iot.processing",
-            description = "Tempo de processamento",
-            extraTags = {"service", "persistence-service"}
-    )
     @RabbitListener(queues = "persistence.data.queue")
     public void handleSensorData(SensorData message) {
         try {
