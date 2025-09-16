@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.Arrays;
-
 @Configuration
 @EnableMongoRepositories(basePackages = "mba.usp.distributed.architecture.persistence_service.repositories")
 public class MongoConfig extends AbstractMongoClientConfiguration {
@@ -16,7 +14,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Value("${spring.data.mongodb.uri}")
     private String mongoUri;
 
-    private String databaseName;
+    private String databaseName = "iotdb";
 
     @Override
     public MongoClient mongoClient() {
@@ -25,12 +23,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        if (databaseName == null) {
-            // Extração automática do nome do banco da URI
-            String withoutParams = mongoUri.split("\\?")[0]; // remove params tipo ?retryWrites=true
-            String[] parts = withoutParams.split("/");
-            databaseName = parts[parts.length - 1];
-        }
         return databaseName;
     }
 }

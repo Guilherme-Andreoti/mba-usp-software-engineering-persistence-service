@@ -35,7 +35,7 @@ public class PersistenceProcessor {
         long durationMillis = nowMillis - startMillis;
         Timer.builder("processing_time")
                 .description("Total time taken from ingestion to completion")
-                .tags("service", "microservices", "record-id", data.getId())
+                .tags("service", "microservices")
                 .register(registry)
                 .record(durationMillis, TimeUnit.MILLISECONDS);
     }
